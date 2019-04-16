@@ -31,13 +31,17 @@ public class KConsumer {
 
     private Consumer<String, String> consumer;
 
+    /**
+     * kafka 통해서 로그 수집 메소드
+     *
+     * @return
+     */
     public List<String> collectLog(){
         List<String> logs = new LinkedList<>();
 
         ConsumerRecords<String, String> consumerRecords;
 
         try{
-            // kafka 통해서 로그 수집
             consumer = getConsumer();
 
             consumerRecords = consumer.poll(Duration.ofSeconds(POLL_DURATION));
@@ -62,6 +66,11 @@ public class KConsumer {
         return logs;
     }
 
+    /**
+     * Consumer 객체 반환 메소드
+     *
+     * @return
+     */
     private Consumer<String, String> getConsumer(){
         Consumer<String, String> consumer;
 
@@ -86,11 +95,13 @@ public class KConsumer {
         return consumer;
     }
 
+    /**
+     * Consumer 객체 종료 메소드
+     */
     private void closeConsumer(){
         try{
             if(consumer != null) {
                 consumer.close();
-                System.out.println("종료");
             }
         } catch (Exception e) {
             logger.error("Consumer 닫기 실패", e);

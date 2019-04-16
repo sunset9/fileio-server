@@ -17,6 +17,13 @@ public class FileioDaoImpl implements FileioDao {
     @Value("${insert.fetchSize}")
     int BATCH_SIZE;
 
+    /**
+     * 쿼리 수행 메소드
+     *
+     * @param conn
+     * @param sqls
+     * @return
+     */
     @Override
     public Boolean executeQuery(Connection conn, List<String> sqls) {
         Boolean isSucc = false;

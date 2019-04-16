@@ -11,20 +11,26 @@ import java.util.*;
 
 @Service
 public class LogParser {
-    static Logger logger = LoggerFactory.getLogger(LogParser.class);
+    Logger logger = LoggerFactory.getLogger(LogParser.class);
 
-    final int DATE_LEN = 15;
-    final int HOSTNAME_LEN = 19;
-    final int SYSNAME_LEN = 19;
+    private final int DATE_LEN = 15;
+    private final int HOSTNAME_LEN = 19;
+    private final int SYSNAME_LEN = 19;
 
+    /**
+     * 로그 파싱 메소드
+     *
+     * @param logs
+     * @return
+     */
     public List<FileLog> getParsedLogs(List<String> logs) {
 
         final String PARSE_STR_SUCC = "SUCCESS";
         final String PARSE_STR_CDB = "CDB";
 
-        List<FileLog> resLogs = new LinkedList();
-        List<FileLog> succLogs = new LinkedList() ;
-        List<FileLog> cdbLogs = new LinkedList() ;
+        List<FileLog> resLogs = new LinkedList<>();
+        List<FileLog> succLogs = new LinkedList<>() ;
+        List<FileLog> cdbLogs = new LinkedList<>() ;
 
         try {
             // 현재 년도 구하기
@@ -88,12 +94,20 @@ public class LogParser {
         return resLogs;
     }
 
-    SimpleDateFormat orifm = new SimpleDateFormat("yyyyMMM d HH:mm:ss", Locale.ENGLISH);
-    SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    private SimpleDateFormat orifm = new SimpleDateFormat("yyyyMMM d HH:mm:ss", Locale.ENGLISH);
+    private SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    /**
+     * 날짜 포멧 변경 메소드
+     * "yyyyMMM d HH:mm:ss" -> "yyyy-MM-dd HH:mm:ss"
+     *
+     * @param dateOri
+     * @return
+     */
 //    Format fm = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss");
     private String getFormatedDate(String dateOri) {
         String resDate = null;
-        
+
         try {
             // String -> Date
             Date date = orifm.parse(dateOri);

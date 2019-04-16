@@ -8,8 +8,14 @@ import java.util.List;
 
 @Controller
 public class ErrorLogManager {
-    static Logger logger = LoggerFactory.getLogger(ErrorLogManager.class);
+    Logger logger = LoggerFactory.getLogger(ErrorLogManager.class);
 
+    /**
+     * 에러로그 파일로 저장
+     *
+     * @param e 에러 메세지
+     * @param errorLogs 작업 실패한 로그
+     */
     public void writeErrorLog(Exception e, List<String> errorLogs){
         try{
             if(errorLogs != null && errorLogs.size() >0){

@@ -38,7 +38,7 @@ public class LogCollector {
     public void start() {
         logger.info("로그 수집기 시작");
 
-        logBuffer = new LinkedList();
+        logBuffer = new LinkedList<>();
         recentProcTime = System.currentTimeMillis();
 
         while(true){
@@ -51,7 +51,7 @@ public class LogCollector {
                 logBuffer.addAll(readLogs);
 
                 // 버퍼가 차거나 일정 시간 지나면 버퍼 처리
-                if(logBuffer.size() >= buffSize || (isRecentProc() == false && logBuffer.size() > 0)){
+                if(logBuffer.size() >= buffSize || (!isRecentProc() && logBuffer.size() > 0)){
                     isSuccProcess = false;
 
                     // 최근 작업 시간 기록
@@ -90,9 +90,14 @@ public class LogCollector {
         }
     }
 
+    /**
+     * 일정 시간 내에 DB 작업 했는지 여부 반환 메소드
+     *
+     * @return 일정 시간내에 작업했으면 true 반환
+     */
     private boolean isRecentProc() {
         long now = System.currentTimeMillis();
-        // 일정 시간내에 작업했으면 true 반환
+
         if((now - recentProcTime)/1000 < timeLimit){
             return true;
         } else
