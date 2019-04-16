@@ -27,6 +27,12 @@ public class DBProcessor {
     @Autowired
     FileioDaoImpl fDao;
 
+    /**
+     * 쿼리문 생성 후 DB insert 작업 메소드
+     *
+     * @param parsedLogs
+     * @return
+     */
     public boolean insertLogs(List<FileLog> parsedLogs) {
         boolean isSucc = false;
 
@@ -47,6 +53,12 @@ public class DBProcessor {
         return isSucc;
     }
 
+    /**
+     * 완전한 쿼리문 생성
+     *
+     * @param parsedLogs
+     * @return
+     */
     private List<String> createSQL(List<FileLog> parsedLogs) {
         final String SUCC_SQL = "INSERT succ_filelog (date_ori, date_ts, hostname, sysname, content) VALUES";
         final String CDB_SQL = "INSERT cdb_filelog (date_ori, date_ts, hostname, sysname, content) VALUES";
@@ -115,6 +127,12 @@ public class DBProcessor {
         return sqls;
     }
 
+    /**
+     * DB insert 수행 메소드
+     *
+     * @param sqls
+     * @return
+     */
     private boolean insertToDb(List<String> sqls) {
         logger.info("DB작업 시작");
 
