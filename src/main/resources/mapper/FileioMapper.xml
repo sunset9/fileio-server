@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mobigen.fileio.dao.FileioDao">
+
+    <!--<insert id="insertLog" parameterType="com.mobigen.serverrver.dto.FileLog">-->
+        <!--insert filelog (date_ori, date_ts, hostname, sysname, content)-->
+        <!--values(-->
+        <!--#{dateOri }-->
+        <!--, #{date }-->
+        <!--, #{hostName }-->
+        <!--, #{sysName }-->
+        <!--, #{content }-->
+        <!--)-->
+    <!--</insert>-->
+
+    <!--<insert id="insertSuccLog" parameterType="java.util.List">-->
+        <!--insert succ_filelog (date_ori, date_ts, hostname, sysname, content)-->
+        <!--values-->
+        <!--<foreach collection="list" item="item" separator =", ">-->
+            <!--( #{item.dateOri }, #{item.date } , #{item.hostName }, #{item.sysName }, #{item.content } )-->
+        <!--</foreach>-->
+    <!--</insert>-->
+
+    <!--<insert id="insertCdbLog" parameterType="java.util.List">-->
+        <!--insert cdb_filelog (date_ori, date_ts, hostname, sysname, content)-->
+        <!--values-->
+        <!--<foreach collection="list" item="item" separator =", ">-->
+            <!--( #{item.dateOri }, #{item.date } , #{item.hostName }, #{item.sysName }, #{item.content } )-->
+        <!--</foreach>-->
+    <!--</insert>-->
+
+    <insert id="insertSuccLog" parameterType="String">
+        insert succ_filelog (date_ori, date_ts, hostname, sysname, content)
+        values ${value}
+    </insert>
+
+    <insert id="insertCdbLog" parameterType="String">
+        insert cdb_filelog (date_ori, date_ts, hostname, sysname, content)
+        values ${value}
+    </insert>
+
+    <insert id="insertErrorSql">
+        insert succ_filelog(id, date_ori, date_ts, hostname, sysname, content)
+        values (1, 'aa','aa','aa','aa','aa')
+    </insert>
+    
+</mapper>
